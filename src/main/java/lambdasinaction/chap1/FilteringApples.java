@@ -3,6 +3,8 @@ package lambdasinaction.chap1;
 import java.util.*;
 import java.util.function.Predicate;
 
+import static java.util.stream.Collectors.toList;
+
 public class FilteringApples{
 
     public static void main(String ... args){
@@ -31,6 +33,10 @@ public class FilteringApples{
         List<Apple> weirdApples = filterApples(inventory, (Apple a) -> a.getWeight() < 80 || 
                                                                        "brown".equals(a.getColor()));
         System.out.println(weirdApples);
+
+        //stream api不用自己定义任何其他方法，来实现
+        List<Apple> collect = inventory.stream().filter(apple -> "green".equals(apple.getColor())).collect(toList());
+        System.out.println(collect);
     }
 
     public static List<Apple> filterGreenApples(List<Apple> inventory){
